@@ -1,0 +1,27 @@
+Paramters 200
+
+n_qubits = 4
+chi = 4
+
+LEARNING_RATE = 0.00001
+n_sessions = 1000
+
+percentile = 93
+super_percentile = 97
+
+optimizer = Adam
+n_generations= 5000
+generations ran for = 5000
+
+Partial stabilizers:
+n_stabilizers (all) = 13856
+n_stabilizers (real) = 1568
+Added all-0 string
+
+projection: 1.0000000000000004
+Max score: 0.987
+
+
+List of stabilizers: []
+solution:
+[]

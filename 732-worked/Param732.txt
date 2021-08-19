@@ -11,7 +11,7 @@ super_percentile = 96
 
 optimizer = Adam
 n_generations= 5000
-generations ran for = 150+
+generations ran for = 1100+
 
 Partial stabilizers:
 n_stabilizers (all) = 13792

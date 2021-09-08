@@ -1,0 +1,19 @@
+Paramters 313_2
+
+n_qubits = 4
+chi = 4
+
+LEARNING_RATE = 0.00001
+n_sessions = 1000
+
+percentile = 93
+super_percentile = 96
+
+optimizer = Adam
+n_generations= 5000
+generations ran for = 3000
+
+Partial stabilizers:
+n_stabilizers = 7616
+
+Max score: 0.98842507

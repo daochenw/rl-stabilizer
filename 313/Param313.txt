@@ -1,0 +1,17 @@
+Parameters:
+
+n_qubits = 4
+chi = 4
+
+LEARNING_RATE = 0.00001
+n_sessions = 1000
+
+percentile = 93
+super_percentile = 96
+
+optimizer = Adam
+
+Randomized bassis
+Target stabilizers = 10000
+Unique stabilizers = 1979
+Overall projection = 1.00000000002

@@ -1,0 +1,22 @@
+{
+    "os": "macOS-10.16-x86_64-i386-64bit",
+    "python": "3.8.5",
+    "heartbeatAt": "2021-08-18T04:02:22.421973",
+    "startedAt": "2021-08-18T04:02:16.314808",
+    "docker": null,
+    "cpu_count": 4,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "DQN/DQN_Discrete.py",
+    "codePath": "ProperRL/DQN/DQN_Discrete.py",
+    "git": {
+        "remote": "https://github.com/daochenw/rl_stabilizer.git",
+        "commit": "0a6ebbe311a47dbbb8205ade4693475e6272aa34"
+    },
+    "email": "wdaochen@gmail.com",
+    "root": "/Users/daochenwang/Desktop/Research/Summer2021/StabilizerSearch",
+    "host": "wireless-10-104-16-185.umd.edu",
+    "username": "daochenwang",
+    "executable": "/opt/anaconda3/bin/python"
+}

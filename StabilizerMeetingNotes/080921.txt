@@ -1,0 +1,14 @@
+# (|0>, |0>, |0>) -> (|0>, |0> + |1>, |0>) -> 
+# (I+P)|0>
+# (I+P): Clifford gate P could be one of 2^n Paulis
+# Diameter of the graph. chi*n (agreed)
+# Initially Z1, Z2, ..., Zn;
+# by making P1,..., Pn all commute: (1+Pn)...(1+P1)|0>: can map Z1, Z2, ..., Zn -> P1, P2, ...,Pn 
+
+# (1+P)(1+Q) = 0 for {P,Q}=0;
+
+# enforce P2 to commute with P1 etc... (or make the agent learn for itself);
+
+# psi1, psi2, psiN -> phi1, phir; r=rank
+
+# (|psi1><psi1|+|psi2><psi2|+...+|psiN><psiN| Magic_state) = O(N)

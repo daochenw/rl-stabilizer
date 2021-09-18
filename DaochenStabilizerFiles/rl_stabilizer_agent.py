@@ -7,8 +7,8 @@ from collections import namedtuple
 import multiprocessing as mp
 
 # problem specification and initial conditions
-n = 6 # n = number of qubits
-chi = 6 # chi = number of stabilizers
+n = 3 # n = number of qubits
+chi = 3 # chi = number of stabilizers
 
 H = [[np.cos(np.pi/8)],[np.sin(np.pi/8)]] 
 target = utils.tensor(*([H]*n)) # target = magic state to decompose

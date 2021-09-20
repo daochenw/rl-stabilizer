@@ -3,6 +3,13 @@ import keras
 import time
 import numpy as np
 import multiprocessing as mp
+# import numba
+
+#TODOs:
+# 1. get numba to work
+# 2. allow a zero component in the decomposition
+# 3. understand what class of methods this method is in
+# 4. see what the output is
 
 from keras.optimizers import SGD, Adam
 from keras.models import Sequential
@@ -12,11 +19,23 @@ import utils_quadform as utils
 from utils_quadform import bits_to_stab
 
 # environment parameters
-n_qubits = 3
-chi = 3
+n_qubits = 4
+chi = 4
 H = [[np.cos(np.pi/8)],[np.sin(np.pi/8)]]
 target = utils.tensor([H]*n_qubits)
-real = False
+epsilon = 0.1
+# epsilon = 1
+tol = 1.0e-7
+real = True
+
+# base_state = np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+#        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#        0, 0, 0, 0, 0, 0, 0, 0, 0, 0],dtype=int)
+
+print('\n n_qubits='+str(n_qubits)+'\n chi='+str(chi)+'\n epsilon='+str(epsilon))
 
 if real:
     m = 3/2*np.power(n_qubits,2)+3/2*n_qubits
@@ -30,9 +49,9 @@ observation_space = 2*MYN
 len_game = MYN
 
 # learning parameters
-n_sessions = 500
-percentile = 98 #top 100-X percentiled we are learning from
-super_percentile = 98 #top 100-X percentile that survives to next iteration
+n_sessions = 1000
+percentile = 93 #top 100-X percentiled we are learning from
+super_percentile = 94 #top 100-X percentile that survives to next iteration
 n_generations = 100000
 INF = 100000
 
@@ -68,13 +87,14 @@ def calc_score(state):
     :returns: the reward (a real number). Higher is better, the network will try to maximize this.
     """
     x = state[:MYN]
+    # x = np.mod(base_state + x,2)
     basis = bits_to_stab(x,n_qubits,chi,real)
     # print('basis=', basis)
     
     projector = utils.orthogonal_projector(basis)
     score = np.linalg.norm(projector*target) # note that this * is okay as working with matrix objects
 
-    if np.allclose(score, 1):
+    if np.allclose(score, 1, atol=tol):
         print('nice, worker has found a stabilizer decomposition with (n_qubits,chi) = ', [n_qubits,chi], 'and score =', score, '\n')
         return score, score
     
@@ -107,10 +127,16 @@ def generate_session(agent, n_sessions, verbose = 1):
 
         for i in range(n_sessions):
             # choose action 1 with probability prob[i]
-            if np.random.rand() < prob[i]:
-                action = 1
+            if np.random.rand() < 1-epsilon:
+                if np.random.rand() < prob[i]:
+                    action = 1
+                else:
+                    action = 0
             else:
-                action = 0
+                action = random.randint(0,1)
+
+            # action = 1
+
             actions[i][step-1] = action
             tic = time.time()
             state_next[i] = states[i,:,step-1]

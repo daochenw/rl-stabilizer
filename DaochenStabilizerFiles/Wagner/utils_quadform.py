@@ -1,6 +1,6 @@
 import numpy as np
 import fieldmath
-
+# I'm gonna implement my own projection function!
 
 X = np.array([[0, 1],[1, 0]])
 Y = np.array([[0, -1j], [1j, 0]])
@@ -8,7 +8,6 @@ Z = np.array([[1, 0], [0, -1]])
 Ddict = {(0,0): 0, (0,1): 2, (1,0): 4,(1,1): 6}
 Jdict = {0:0, 1:4}
 ketbit = {0:np.array([1,0]),1:np.array([0,1])}
-
 
 def gs_prj(base, target):
     if np.allclose(np.sum((base.H*base)), 0):
